@@ -1,0 +1,170 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.nav{
+    margin-top: 2rem;
+    height: 7vh;
+    border: .5px solid #c3bdbd;
+}
+.movie{
+    max-width: 100%;
+}
+
+#favorite-movies-container{
+ margin-left: 70%;
+}
+
+#results-container{
+    margin-top:2%;
+    display: grid;
+    overflow: hidden;
+    row-gap: 50px;
+    padding: 2rem;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: auto;  
+    border: .4rem solid black; 
+    border-radius: 1rem;
+} 
+
+.search-container{
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+}
+
+#search-input{
+    height: 50px;
+    width: 200px;
+    border: .2rem solid black; 
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+}
+button{
+    height: 50px;
+    width: 200px;
+    border: .2rem solid black; 
+    border-radius: 1rem;
+}
+
+#search-button{
+    height: 50px;
+    width: 100px;
+    border: .2rem solid rgb(241, 162, 162); 
+    border-radius: 1rem; 
+    margin-left: 10px;  
+     
+}
+
+/* 
+#search-button:hover{
+    zoom: 1;
+    border: .2rem solid rgb(25, 25, 24)
+} */
+
+#search-button{
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    animation: dance 1s infinite;
+}
+
+@keyframes dance {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-5px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.dancing-button:hover {
+    animation: none; /* Stop the animation on hover */
+    background-color: #e74c3c;
+}
+
+/* Add this CSS to your stylesheet */
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease; /* Add a smooth transition effect */
+  
+    /* Define the vibration animation */
+    animation: vibrate 0.3s infinite;
+  }
+  
+  @keyframes vibrate {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-2px);
+    }
+    40% {
+      transform: translateX(2px);
+    }
+    60% {
+      transform: translateX(-2px);
+    }
+    80% {
+      transform: translateX(2px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Disable the animation on hover */
+  .vibrating-button:hover {
+    animation: none;
+    transform: translateX(0);
+  }
+  
+
+  /* Add this CSS to your stylesheet */
+
+  .my-Favorite-Movies {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.my-Favorite-Movies.clicked {
+    animation: zoomAndVibrate 1s;
+}
+
+@keyframes zoomAndVibrate {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: scale(1.2);
+    }
+    20%, 40%, 60%, 80% {
+        transform: scale(0.8);
+    }
+}
