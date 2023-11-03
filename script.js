@@ -37,6 +37,7 @@ searchButton.addEventListener("click", () => {
       console.error("Error:", error);
     });
 });
+// ...
 
 function renderMovies(movies) {
   // Clear the previous results.
@@ -45,20 +46,47 @@ function renderMovies(movies) {
   movies.forEach((movie) => {
     const movieElement = document.createElement("div");
     movieElement.classList.add("movie");
-        movieElement.classList.add('div1');
-    movieElement.innerHTML = `<div>
-    <img src="${movie.Poster}" alt="${movie.Title} Poster"></div>
-      <h2>${movie.Title}</h2>
-      
-      <p>Year: ${movie.Year}</p>
-      <p>Type: ${movie.Type}</p>
-      <p>ImdbRating :${movie.imdbRating}</p>
-      <button class="favorite-button" data-imdbid="${movie.imdbID}">Add to Favorites</button>
-    `;
+    movieElement.classList.add('div1');
 
-    resultsContainer.appendChild(movieElement);
+    // Fetch IMDb rating for each movie
+    fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.imdbRating) {
+          // If IMDb rating is available, display it
+          movieElement.innerHTML = `
+            <div>
+              <img src="${movie.Poster}" alt="${movie.Title} Poster">
+            </div>
+            <h2>${movie.Title}</h2>
+            <p>Year: ${movie.Year}</p>
+            <p>Type: ${movie.Type}</p>
+            <p>IMDb Rating: ${data.imdbRating}</p>
+            <button class="favorite-button" data-imdbid="${movie.imdbID}">Add to Favorites</button>
+          `;
+        } else {
+          // If IMDb rating is not available, display a message
+          movieElement.innerHTML = `
+            <div>
+              <img src="${movie.Poster}" alt="${movie.Title} Poster">
+            </div>
+            <h2>${movie.Title}</h2>
+            <p>Year: ${movie.Year}</p>
+            <p>Type: ${movie.Type}</p>
+            <p>IMDb Rating: Not Available</p>
+            <button class="favorite-button" data-imdbid="${movie.imdbID}">Add to Favorites</button>
+          `;
+        }
+
+        resultsContainer.appendChild(movieElement);
+      })
+      .catch((error) => {
+        console.error("Error fetching IMDb rating:", error);
+      });
   });
 }
+
+// ...
 
 resultsContainer.addEventListener("click", (event) => {
   if (event.target.classList.contains("favorite-button")) {
@@ -66,6 +94,8 @@ resultsContainer.addEventListener("click", (event) => {
     addToFavorite(imdbID);
   }
 });
+
+
 function addToFavorite(movieId) {
   // Fetch the movie details by ID
   fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`)
@@ -142,7 +172,7 @@ function displayFavoriteMovies() {
         <h2>${movie.Title}</h2>
         <p>Year: ${movie.Year || "N/A"}</p>
         <p>Type: ${movie.Type || "N/A"}</p>
-        <p>ImdbRating :${movie.imdbRating}</p>
+        <p>imdbRating :${movie.imdbRating}</p>
         <img src="${movie.Poster || ""}" alt="${movie.Title || "Unknown"} Poster">
         <button class="remove-button" data-imdbid="${movie.imdbID}">Remove from Favorites</button>
       `;

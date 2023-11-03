@@ -3,11 +3,57 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+
+
+/* h1 tage in decoration */
+h1 {
+    text-align: center; /* Center the text */
+    font-size: 2em; /* Adjust the font size as needed */
+    color: #3498db; /* Set the text color to a shade of blue */
+    position: relative; /* Set the position to relative to use pseudo-elements */
+  }
+  
+  h1::before,
+  h1::after {
+    content: ""; /* Add content to the pseudo-elements */
+    position: absolute;
+    top: 50%;
+    width: 50%;
+    height: 3px; /* Adjust the line thickness */
+    background: #e74c3c; /* Set the background color to a shade of red */
+    transition: transform 0.3s; /* Add a transform animation */
+  }
+  
+  h1::before {
+    left: 0;
+    transform-origin: 100% 50%;
+  }
+  
+  h1::after {
+    right: 0;
+    transform-origin: 0 50%;
+  }
+  
+  h1:hover::before {
+    transform: scaleX(0); /* Hide the left line on hover */
+  }
+  
+  h1:hover::after {
+    transform: scaleX(0); /* Hide the right line on hover */
+  }
+  
+
+
+
+
 .nav{
     margin-top: 2rem;
     height: 7vh;
     border: .5px solid #c3bdbd;
 }
+
+
 .movie{
     max-width: 100%;
 }
